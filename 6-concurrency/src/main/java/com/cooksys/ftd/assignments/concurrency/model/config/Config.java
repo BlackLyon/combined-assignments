@@ -2,6 +2,9 @@ package com.cooksys.ftd.assignments.concurrency.model.config;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import java.nio.file.Path;
 import java.util.List;
@@ -17,7 +20,18 @@ public class Config {
      * @return the unmarshalled {@link Config} object
      */
     public static Config load(Path path) {
-        throw new NotImplementedException();
+    	Config cf = null;
+    	
+    	try {
+			JAXBContext jc = JAXBContext.newInstance(Config.class);
+			Unmarshaller um = jc.createUnmarshaller();
+			cf = (Config) um.unmarshal(path.toFile());
+			
+		} catch (JAXBException e) {
+			e.printStackTrace();
+			System.out.println("Failure in Config Load Method");
+		}
+    	return cf;
     }
 
     /**

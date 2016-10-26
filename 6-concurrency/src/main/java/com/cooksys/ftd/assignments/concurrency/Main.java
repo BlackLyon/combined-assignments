@@ -1,5 +1,10 @@
 package com.cooksys.ftd.assignments.concurrency;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import com.cooksys.ftd.assignments.concurrency.model.config.Config;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Main {
@@ -15,6 +20,10 @@ public class Main {
      * is not disabled, create a {@link Client} object with the client config ans spin off a thread to run it.
      */
     public static void main(String[] args) {
-       throw new NotImplementedException();
+    	
+    	System.out.println("Thread created for server");
+    	new Thread(new Server()).start();
+    	System.out.println("Thread created for client");
+    	new Thread(new Client()).start();
     }
 }
